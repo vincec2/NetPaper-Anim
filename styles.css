@@ -1,0 +1,321 @@
+/* Reset / base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #050816;
+  --bg-alt: #0f172a;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.15);
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #1f2937;
+  --radius-lg: 16px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.65);
+  --font-sans: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at top, #111827 0, #020617 40%, #020617 100%);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Layout */
+.page {
+  min-height: 100vh;
+}
+
+/* Hero layout */
+.hero {
+  padding: 3.5rem 1.5rem 2.5rem;
+}
+
+.hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.85);
+  padding: 2rem 1.75rem 2.2rem;
+}
+
+.hero-inner h1 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.hero-inner p {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: var(--muted);
+}
+
+/* Buttons row */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.3rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.18s ease-out;
+  white-space: nowrap;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  color: #020617;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.85);
+}
+
+.secondary-btn {
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text);
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.secondary-btn:hover {
+  background: rgba(15, 23, 42, 1);
+  border-color: rgba(148, 163, 184, 0.8);
+}
+
+.third-btn {
+  background: #b6c0fa;
+  color: #020617;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+}
+
+.third-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.85);
+}
+
+/* Content sections */
+.section {
+  padding: 3rem 1.5rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.9);
+  background: #020617;
+}
+
+.section-alt {
+  background: #020617;
+  background: radial-gradient(
+    circle at top,
+    rgba(15, 23, 42, 0.9) 0,
+    #020617 55%,
+    #020617 100%
+  );
+}
+
+.section-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-inner h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.section-inner p {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+/* Footer */
+.site-footer {
+  padding: 1.5rem 1.5rem 2.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  border-top: 1px solid rgba(15, 23, 42, 0.8);
+}
+
+/* Hide buttons during shot animation so we only see the overlays */
+.btn.is-hidden-for-shot {
+  visibility: hidden;
+}
+
+/* Paper + net overlays (fixed to viewport) */
+.shot-paper,
+.shot-net {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Crumpled paper image */
+.shot-paper {
+  width: 39px;
+  height: 39px;
+  background-image: url("./paper.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 12px 22px rgba(15, 23, 42, 0.8));
+  transition: transform 0.15s ease-out;
+}
+
+/* Basketball net image */
+.shot-net {
+  width: 110px;
+  height: 110px;
+  background-image: url("./net.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+
+/* When the net becomes visible / pops in */
+.shot-net.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Tiny "score" effect when the paper lands */
+.shot-net.is-scored {
+  animation: netScorePop 0.22s ease-out;
+}
+
+@keyframes netScorePop {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Contact button morphing into net */
+#contact-trigger {
+  position: relative;
+  overflow: hidden;
+}
+
+#contact-trigger .btn-label {
+  display: inline-block;
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+}
+
+/* When it's morphing, shrink + fade the label and "pop" the button */
+#contact-trigger.is-morphing-to-net {
+  transition:
+    transform 0.22s ease-out,
+    background 0.22s ease-out,
+    border-color 0.22s ease-out;
+  transform: translateY(-2px) scale(1.05);
+  background: rgba(15, 23, 42, 0);
+  border-color: transparent;
+}
+
+#contact-trigger.is-morphing-to-net .btn-label {
+  opacity: 0;
+  transform: translateY(4px) scale(0.92);
+}
+
+/* Resume button morphing into scoreboard */
+#resume-trigger {
+  position: relative;
+  overflow: hidden;
+}
+
+#resume-trigger .btn-label {
+  display: inline-block;
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+}
+
+#resume-trigger.is-morphing-to-scoreboard {
+  transition:
+    transform 0.22s ease-out,
+    background 0.22s ease-out,
+    border-color 0.22s ease-out;
+  transform: translateY(-2px) scale(1.03);
+  background: transparent;
+  border-color: transparent;
+}
+
+#resume-trigger.is-morphing-to-scoreboard .btn-label {
+  opacity: 0;
+  transform: translateY(4px) scale(0.92);
+}
+
+/* Scoreboard overlay */
+.shot-scoreboard {
+  position: fixed;
+  width: 140px;
+  height: 90px;
+  pointer-events: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("./scoreboard.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+  filter: drop-shadow(0 12px 22px rgba(15, 23, 42, 0.8));
+  z-index: 10000;
+}
+
+.shot-scoreboard.is-visible {
+  opacity: 1;
+}
+
+/* Simple responsive tweak */
+@media (max-width: 640px) {
+  .hero-inner {
+    padding: 1.6rem 1.25rem 1.9rem;
+  }
+
+  .button-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

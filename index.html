@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Paper → Net Shot Animation Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-inner">
+        <h1>Paper → Net Shot Animation</h1>
+        <p>
+          This demo shows the “crumpled paper into basketball net” transition I use on my portfolio.
+          Click <strong>View my projects</strong> to see the full sequence:
+          crumple frames → parabolic shot → swish into the net → navigation.
+        </p>
+
+        <div class="button-row">
+          <!-- Shooter: this is where the paper starts -->
+          <a
+            href="#projects"
+            data-href="#projects"
+            class="btn primary-btn"
+            id="projects-trigger"
+          >
+            <span class="btn-label">View my projects</span>
+          </a>
+
+          <!-- Net: visual target for the shot -->
+          <a href="#contact" class="btn secondary-btn" id="contact-trigger">
+            <span class="btn-label">Contact me</span>
+          </a>
+
+          <!-- Scoreboard: optional extra moving piece -->
+          <a href="#resume" class="btn third-btn" id="resume-trigger">
+            <span class="btn-label">Resume</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section id="projects" class="section section-alt">
+      <div class="section-inner">
+        <h2>Projects</h2>
+        <p>
+          This is the “destination” content for the demo. In your real site, this would be the page
+          or section you navigate to after the animation finishes.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-inner">
+        <h2>Contact</h2>
+        <p>
+          Another dummy section so the contact button has somewhere meaningful to point.
+        </p>
+      </div>
+    </section>
+
+    <section id="resume" class="section section-alt">
+      <div class="section-inner">
+        <h2>Resume</h2>
+        <p>
+          The resume button visually morphs into a scoreboard overlay during the animation.
+        </p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>© 2025 Vincent Feng</p>
+    </footer>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
